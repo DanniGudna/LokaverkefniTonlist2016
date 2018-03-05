@@ -37,10 +37,10 @@
       (setq skil (cons(abs (nth l lst)) skil))
       (setq l (- l 1))
       (setq cnt (- cnt 1))
-      (when (= cnt 0)(return skil)))))    
+      (when (= cnt 0)(return skil)))))
 
 ;-----------------------------------------
- 
+
 ;lst=einhver listar
 ;skilar nýjum lista með mismunin á milli ax og ax-1 og loka talan er b3-a2
 (defun tonbillst (a b)
@@ -52,8 +52,8 @@
       (push (- (nth cnt a)(nth (- cnt 1) a)) skil)
       (setq cnt (- cnt 1))
       (when (= cnt 0) (return skil)))))
-      
-    
+
+
 
 ;-----------------------------------------
 
@@ -147,7 +147,7 @@
       (if (= lstb (nth cnt lsta))(setq skil (+ skil 1)))
       (setq cnt (+ cnt 1))
       (when (= cnt (list-length a))(return skil)))))
-      
+
 
 ;----------------------------------------------------------------
 
@@ -177,7 +177,7 @@
     (setq stad 65)
     (setq fjoldi 20)
     (setq skyld 3)
-     
+
     (setq lstB4(tonbillst a (nth 3 b)))
     (setq lstB3(tonbillst a (nth 2 b)))
     (setq lstB2(tonbillst a (nth 1 b)))
@@ -188,7 +188,7 @@
     (push (- (nth 2 c)(nth 1 c))lstA)
     (push (- (nth 1 c)(nth 0 c))lstA)
 
-    
+
     ;reiknar vægið á fyrstu nótuna
     (setq B1 (* stad (stadsetningTonbila lstA lstB1)))
     (setq B1 (+ B1 (* stefna (stefnatonbila lstA lstB1))))
@@ -214,13 +214,13 @@
     (setq B4 (+ B4 (* skyld (skyldtonbila lstA lstB4))))
 
     ;lætur öll vægi í list og finnur hæsta vægið af þeim
-    (setq loka (max B1 B2 B3 B4))   
+    (setq loka (max B1 B2 B3 B4))
     (push B4 lokalst)
     (push B3 lokalst)
     (push B2 lokalst)
     (push B1 lokalst)
-    
-    
+
+
 ;skilar því gildi sem var með hæsta vægið
     (loop
       (if (= loka (nth cnt1 lokalst))(return (nth cnt1 b)))
@@ -252,7 +252,7 @@
       (setq lstset (cons (nth 1 lstskil) lstset))
       (setq lstset (cons (nth 0 lstskil) lstset))
       (setq lstset (reverse lstset))
-  
+
       (setq x (finnanaestunotu lstset lstrandom a))
       (setq lstskil ( cons x lstskil))
 
@@ -365,7 +365,7 @@
       (setq skil (cons (nth cnt duration) skil))
       (print skil)
       (setq cnt (- cnt 1))
-      (when (< cnt 0)(return (setq skil (cons last skil))))))) 
+      (when (< cnt 0)(return (setq skil (cons last skil)))))))
 
 ;x er fast gildi sem er gurnn lengd nótu
 ;y1 y2 y3 segir til um númer hvers stakas á að breytast
@@ -417,7 +417,7 @@
  (defvar CHANNELS-LIST '( 0 0 0 0))
 
 (defun time-list2 (lst)
-               (reverse (maplist #'(lambda  (el) 
+               (reverse (maplist #'(lambda  (el)
                                            (apply #'+  el))
                                   (reverse lst))))
 
@@ -431,8 +431,8 @@
 
 (defun time-list (lst)
 (cond((< 0 (length lst))
-          (let (( ll (if (= (car lst) 0) lst(cons 0 lst))))   
-               (reverse (maplist #'(lambda  (el) 
+          (let (( ll (if (= (car lst) 0) lst(cons 0 lst))))
+               (reverse (maplist #'(lambda  (el)
                                            (apply #'+  el))
                                   (reverse ll)))))))
 (defun No-parenth (lst)
@@ -449,28 +449,28 @@
     (if (numberp x)
         (if (minusp x)
             (* (truncate (+  (abs x) 0.5)) -1)
-            (truncate (+ x 0.5))) x))          
+            (truncate (+ x 0.5))) x))
 
 
 (defun variable-length-midi-time (ticks)
   (let ((high-byte1 0)(high-byte2 0)(high-byte3 0)
         (mod-ticks (mod ticks #x80)))
-    (cond 
+    (cond
       ((> ticks #x1FFFFF)
         (setq high-byte3 (+ #x80 (truncate (/ ticks #x200000))))
         (setq high-byte2 (+ #x80 mod-ticks))
         (setq high-byte1 (+ #x80 mod-ticks))
         (setq ticks mod-ticks)
-        (list high-byte3 high-byte2 high-byte1 ticks))  
+        (list high-byte3 high-byte2 high-byte1 ticks))
       ((> ticks #x3FFF)
         (setq high-byte2 (+ #x80 (truncate (/ ticks #x4000))))
         (setq high-byte1 (+ #x80 mod-ticks))
         (setq ticks mod-ticks)
-        (list high-byte2 high-byte1 ticks))  
+        (list high-byte2 high-byte1 ticks))
       ((> ticks #x7F)
         (setq high-byte1 (+ #x80 (truncate (/ ticks #x80))))
         (setq ticks mod-ticks)
-        (list high-byte1 ticks))  
+        (list high-byte1 ticks))
       (t (list ticks)))
    ))
 
@@ -478,7 +478,7 @@
 
 (defun covert-length-to-4-byte-list (len)
   (let ((byte1 0)(byte2 0)(byte3 0)(byte4 0))
-    (cond 
+    (cond
        ((> len #xFFFFFF)
          (setq byte4 (truncate (/ len #x1000000)))
          (setq byte3 (mod len #x1000000))
@@ -495,7 +495,7 @@
        (t  (setq byte1 len)))
     (list byte4 byte3 byte2 byte1)))
 
-  
+
 ;(defmacro while (test &body body)
 ;  (let ((testlab (gensym))
  ;       (toplab (gensym)))
@@ -525,22 +525,22 @@
                                  (nth 2 l1)(nth 3 l1)))(copy-list amp)))
       (new-pitch   (mapcar #'(lambda (l1)
                            (list (nth 0 l1)(+ 224 (nth 1 l1))
-                                 (nth 2 l1)(nth 3 l1)))(copy-list pitch)))) 
+                                 (nth 2 l1)(nth 3 l1)))(copy-list pitch))))
  (while (or  new-amp notes   new-pitch)
 ;(if   (eq (length notes)0)(progn(print-EVE (length new-amp))(print-EVE (length new-pitch))))
 (cond ((and (neq nil notes)
-            (or(eq  nil new-amp) 
+            (or(eq  nil new-amp)
                (<= (car (car notes))(car(car new-amp))))
-            (or(eq  nil new-pitch) 
+            (or(eq  nil new-pitch)
                (<= (car (car notes))(car(car new-pitch)))))
        (push (pop notes)out-list))
       ((and (neq nil new-amp)
             (or(eq  nil notes)
                (> (car (car notes))(car(car new-amp))))
-            (or(eq  nil new-pitch) 
+            (or(eq  nil new-pitch)
                (> (car(car new-pitch))(car(car new-amp)))))
        (push (pop new-amp) out-list))
-      (t   (if (neq nil new-pitch)(push (pop new-pitch)out-list))) 
+      (t   (if (neq nil new-pitch)(push (pop new-pitch)out-list)))
 ))
 (reverse out-list)))
 
@@ -549,19 +549,19 @@
 (defvar look-midi nil)
 
 (defun  make-midi-file-list  (attacks pitches durs vels chans)
-  
+
  (setq chans (mapcar #'(lambda (l1)(+ 1 l1))   (copy-list chans)))
   (let ((t-time)(note)(midi-list))
     (while attacks
       (setq t-time (pop attacks))
       (setq note (pop pitches))
-      (push (list 
+      (push (list
                 t-time
                 (+ #x8f (car chans))
                  note
                 (pop vels))
               midi-list)
-      (push (list 
+      (push (list
                 (+ t-time (car durs))
                 (+ #x8f (car chans))
                 note
@@ -571,10 +571,10 @@
          (pop chans));(print-EVE  midi-list)
 
 (if(or (neq nil AMPLITUDE-LIST)(neq nil PITCH-ENVELOPE-LIST))
-    (setq  midi-list (two-incr-lists(sort 
+    (setq  midi-list (two-incr-lists(sort
        (nreverse midi-list) #'< :key #'(lambda (a) (car a)))
   AMPLITUDE-LIST PITCH-ENVELOPE-LIST))
-         ;  (setq midi-list  (nreverse midi-list) )) 
+         ;  (setq midi-list  (nreverse midi-list) ))
    (setq  midi-list (sort  (nreverse midi-list) #'< :key #'(lambda (a) (car a)))))
 ;;;
 (setq look-midi   midi-list)
@@ -584,18 +584,18 @@
   (let ((data (make-midi-file-list attacks pitches durs vels chans))
         (track-info
           '(#x00 #xff #x58 #x04 #x04  #x02 #x24 #x08
-            #x00 #xff #x51 #x03 #x07 #xa1 #x20)) 
+            #x00 #xff #x51 #x03 #x07 #xa1 #x20))
         (track-end '(#x00 #xff #x2f #x00)))
-    
-    (append     
-      (no-parenth(list #x4D #x54 #x68 #x64 
-       #x00 #x00 #x00 #x06  
-       #x00 #x00   
+
+    (append
+      (no-parenth(list #x4D #x54 #x68 #x64
+       #x00 #x00 #x00 #x06
+       #x00 #x00
        #x00 #x01
        #x00 #x60
- 
+
      #x4D #x54 #x72 #x6B
-    ;  #x00 #xff #x04 #x0E    
+    ;  #x00 #xff #x04 #x0E
     ; #x00 #x00 #x0 #x3B
      ; #x00 #x00 #x0 #x24
 
@@ -603,7 +603,7 @@
 
 
 
-) 
+)
       (covert-length-to-4-byte-list (+ (length track-info)(length data)(length track-end)))
       track-info
       data
@@ -613,8 +613,8 @@
 
 
 
-;====================================================== 
- 
+;======================================================
+
  (defun set-mac-file-type (path mac-file-type)
  (declare (ignore path mac-file-type)) t)
 
@@ -622,15 +622,15 @@
 
  (let ((new-att (time-list(append (list 0)  (cdr  (mapcar #'(lambda (l1 )(round2 (* 2 l1 )))  attack-list) ))))
     (new-dur   (mapcar #'(lambda (l1 )(round2 (* 2 l1 )))    duration-list) ))
- 
+
  (PW-midi-file-SAVE1  (make-midi-file-0
  new-att pitch-list new-dur velocity-list channels-list)  name1 path )))
- 
+
  (defun PW-midi-file-SAVE1  (midi-data-list  name1 path  )
   (let* ((new-file))
- 
+
  (setq *PRINT-BASE* 2)
- 
+
  (setq new-file (ccl::create-file  (make-pathname :directory path :name   name1  ;:type "MID"
  ) ))
 
@@ -663,6 +663,7 @@
 
 ;----------------------------------------------
 ;----------------------------
+;;;;FINAL PART;;;;;
 
 
 ;;ATH KEYRA ÞETTA ÞEGAR BÚIÐ ER AÐ DEFINE ÖLL FUNCTIONS ANNARS MUN ÞETTA EKKI VIRKA
