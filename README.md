@@ -1,4 +1,4 @@
-# TonlistLokaverkefniHaust2016H-
+# LokaverkefniTonlist2016
 
 Final porject for TÖL502G (Tónlist: Fegurð, Gervigreind og Glundroði) class at the University of Iceland. Makes a random melody based on given parameters in LISP.
 

@@ -669,8 +669,11 @@
 ;;ATH KEYRA ÞETTA ÞEGAR BÚIÐ ER AÐ DEFINE ÖLL FUNCTIONS ANNARS MUN ÞETTA EKKI VIRKA
 ;;;fara eftir númera röð
 
-(PW-midi-file-SAVE3 "NYTT.mid" "/Users/Danni/Desktop/")
+(setq channels-list (makechannellist 100 11))  ;;1
 
+(setq velocity-list (velocitylist 150 100 100)) ;;2
+
+(setq duration-list (makeduration2 24 20 4 '(198 96) 100)) ;;3
 
 (setq attack-list (makeattackfromduration duration-list)) ;stillir ekkert bil milli nótna  ;;4
 
@@ -678,11 +681,6 @@
 (setq attack-list (durationofattack attack-list 110)) ; stillir smá bil allstaðar?  ;;5
 (setq attack-list (durationofattack2 attack-list 80 125)) ;;5
 
-
 (setq pitch-list (buatillaglinu '(60 72 68 84) '(60 72 68 84) 60 84 '(0 2 4 5 7 9 11) '(1 -1 5 -5) 100)) ;;6
 
-(setq duration-list (makeduration2 24 20 4 '(198 96) 100)) ;;3
-
-(setq velocity-list (velocitylist 150 100 100)) ;;2
-
-(setq channels-list (makechannellist 100 11))  ;;1
+(PW-midi-file-SAVE3 "NYTT.mid" "/Users/Danni/Desktop/")
